@@ -9,6 +9,7 @@
 db/db_regions.lua
 db/db_realms.lua
 db/db_score_tiers.lua
+db/db_score_stats.lua
 
 locale/locale.lua
 locale/enUS.lua
