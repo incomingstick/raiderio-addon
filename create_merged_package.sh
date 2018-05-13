@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir -f package
+mkdir -p package
 
 cd package
 
@@ -14,12 +14,12 @@ unzip -d addon latest.zip
 echo "Manual build $NEW_VERSION" > addon/CHANGES.txt
 
 echo "Overlaying latest DB..."
-cp -v ../db/db_*_{characters,lookup}.lua addon/RaiderIO/db
+cp -v ../db/db_*.lua addon/RaiderIO/db
+cp ../*.{lua,toc} addon/RaiderIO
+cp ../locale/enUS.lua addon/RaiderIO/locale
 
-OLD_VERSION=`cat addon/RaiderIO/RaiderIO.toc  | grep 'Version: ' | cut -d '(' -f2 | cut -d')' -f1`
-
-echo "Migrating scripts from version $OLD_VERSION => v$NEW_VERSION"
-find . -name \*.lua -o -name \*.toc -exec perl -pi -e s/$OLD_VERSION/v$NEW_VERSION/g {} \;
+echo "Setting up as version v$NEW_VERSION"
+find . -name \*.toc -exec perl -pi -e "s/\@project-version\@/v$NEW_VERSION/" {} \;
 
 cd addon
 7z -tzip a ../raiderio-addon-${NEW_VERSION}.zip RaiderIO*
