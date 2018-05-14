@@ -310,7 +310,7 @@ do
 		if type(raw) ~= "string" then
 			return
 		end
-		local regexesFindLevel = { "%+%s*(%d+)", "(%d+)%s*%+", "(%d+)" }
+		local regexesFindLevel = { "(%d+)%+", "%+%s*(%d+)", "(%d+)%s*%+", "(%d+)" }
 
 		local level = 0;
 		for i, regex in ipairs(regexesFindLevel) do
