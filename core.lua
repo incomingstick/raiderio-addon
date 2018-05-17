@@ -1303,7 +1303,7 @@ do
 									qHighlightStrSameAsBest = true
 									qHighlightStr1 = q.dungeon.shortName
 									qHighlightStr2 = "+" .. l
-									searchLevel = l.level
+									searchLevel = q.level
 								end
 								break
 							end
