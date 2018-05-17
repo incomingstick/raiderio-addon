@@ -1264,6 +1264,8 @@ do
 				end
 			end
 
+			local searchLevel = 0
+
 			-- if not, then are we queued for, or hosting a group for a keystone run?
 			if not focusOnDungeonIndex then
 				local queued, isHosting = GetLFDStatus()
@@ -1284,6 +1286,7 @@ do
 							qHighlightStrSameAsBest = profile.maxDungeonName == queued.dungeon.shortName
 							qHighlightStr1 = queued.dungeon.shortName
 							qHighlightStr2 = "+" .. profile.dungeons[queued.index]
+							searchLevel = queued.level
 						end
 					else
 						-- at the moment we pick the first queued dungeon and hope the player only queues for one dungeon at a time, not multiple different keys
@@ -1300,6 +1303,7 @@ do
 									qHighlightStrSameAsBest = true
 									qHighlightStr1 = q.dungeon.shortName
 									qHighlightStr2 = "+" .. l
+									searchLevel = l.level
 								end
 								break
 							end
@@ -1359,8 +1363,8 @@ do
 				tooltip:AddDoubleLine(L.MAINS_SCORE, profile.mainScore, 1, 1, 1, GetScoreColor(profile.mainScore))
 			end
 
-			if focusOnKeystoneLevel then
-				AppendAveragePlayerScore(tooltip, focusOnKeystoneLevel)
+			if focusOnKeystoneLevel or searchLevel then
+				AppendAveragePlayerScore(tooltip, focusOnKeystoneLevel or searchLevel)
 			end
 
 			if IS_DB_OUTDATED then
